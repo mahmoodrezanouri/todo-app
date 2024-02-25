@@ -23,7 +23,7 @@ const TodoTaskService = {
 
     addTask: async (newTask: TodoTask): Promise<TodoTask> => {
         try {
-            const createdTask = await AxiosApiService.post<TodoTask>(`${API_BASE_URL}/tasks`, newTask);
+            const createdTask = await AxiosApiService.post<TodoTask>(`tasks`, newTask);
             return createdTask;
         } catch (error) {
             console.error('Failed to add task', error);

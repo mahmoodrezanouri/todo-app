@@ -9,7 +9,13 @@ interface Todo {
     description: string;
 }
 
-const TodoContainer: React.FC = () => {
+
+interface TodoContainerProps {
+    refreshTodos: boolean;
+    setRefreshTodos: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const TodoContainer: React.FC<TodoContainerProps> = ({ refreshTodos, setRefreshTodos }) => {
 
     const [todos, setTodos] = useState<Todo[]>([]);
     const [pageSize, setPageSize] = useState<number>(10);
@@ -32,13 +38,17 @@ const TodoContainer: React.FC = () => {
 
         setTodos(result);
         setTotalPages(0);
+
     };
 
     useEffect(() => {
 
-        getTodos();
+        if (refreshTodos) {
+            getTodos();
+            setRefreshTodos(false);
+        }
 
-    }, [currentPage, pageSize]);
+    }, [currentPage, pageSize, refreshTodos]);
 
     return (
 

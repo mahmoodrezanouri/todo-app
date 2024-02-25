@@ -15,7 +15,7 @@ interface TodoGridProps {
 
 interface Todo {
     id: number;
-    desription: string;
+    description: string;
 }
 
 const TodoGrid: FC<TodoGridProps> = ({ todos , totalPages, onPageChange, onPerRowsChange, loading, error }) => {
@@ -31,7 +31,7 @@ const TodoGrid: FC<TodoGridProps> = ({ todos , totalPages, onPageChange, onPerRo
         },
         {
             name: 'description',
-            selector: (row: Todo) => row.desription,
+            selector: (row: Todo) => row.description,
         }
     ];
 
