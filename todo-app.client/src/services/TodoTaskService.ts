@@ -1,19 +1,15 @@
 // TodoTaskService.ts
 
 import AxiosApiService from '../services/AxiosApiService';
+import Todo from '../models/Todo';
 
-const API_BASE_URL = 'http://localhost:5065/api'; // Replace with your TodoTask API base URL
+const API_BASE_URL = 'tasks'; // Replace with your TodoTask API base URL
 
-interface TodoTask {
-    id: string;
-    description: string;
-    // Add other properties as needed
-}
 
 const TodoTaskService = {
-    getAllTasks: async (): Promise<TodoTask[]> => {
+    getAllTasks: async (): Promise<Todo[]> => {
         try {
-            const { data } = await AxiosApiService.get<TodoTask[]>(`tasks`);
+            const { data } = await AxiosApiService.get<Todo[]>(API_BASE_URL);
             return data;
         } catch (error) {
             console.error('Failed to fetch tasks', error);
@@ -21,9 +17,9 @@ const TodoTaskService = {
         }
     },
 
-    addTask: async (newTask: TodoTask): Promise<TodoTask> => {
+    addTask: async (newTask: Todo): Promise<Todo> => {
         try {
-            const createdTask = await AxiosApiService.post<TodoTask>(`tasks`, newTask);
+            const createdTask = await AxiosApiService.post<Todo>(API_BASE_URL, newTask);
             return createdTask;
         } catch (error) {
             console.error('Failed to add task', error);

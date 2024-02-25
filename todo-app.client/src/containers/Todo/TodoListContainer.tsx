@@ -2,20 +2,15 @@ import React, { useState, useEffect } from 'react';
 import TodoGrid from '../../components/Todo/TodoGrid';
 import TodoTaskService from '../../services/TodoTaskService';
 import useAsync from '../../hooks/useAsync';
+import Todo from '../../models/Todo';
 
 
-interface Todo {
-    id: number;
-    description: string;
-}
-
-
-interface TodoContainerProps {
+interface TodoListContainerProps {
     refreshTodos: boolean;
     setRefreshTodos: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TodoContainer: React.FC<TodoContainerProps> = ({ refreshTodos, setRefreshTodos }) => {
+const TodoListContainer: React.FC<TodoListContainerProps> = ({ refreshTodos, setRefreshTodos }) => {
 
     const [todos, setTodos] = useState<Todo[]>([]);
     const [pageSize, setPageSize] = useState<number>(10);
@@ -65,5 +60,5 @@ const TodoContainer: React.FC<TodoContainerProps> = ({ refreshTodos, setRefreshT
 
 };
 
-export default TodoContainer;
+export default TodoListContainer;
 
