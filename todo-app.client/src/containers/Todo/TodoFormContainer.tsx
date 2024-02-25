@@ -3,6 +3,8 @@ import TodoForm from '../../components/Todo/TodoForm';
 import TodoTaskService from '../../services/TodoTaskService';
 import useAsync from '../../hooks/useAsync';
 import Todo from '../../models/Todo';
+import ServiceResponse from '../../models/ServiceResponse';
+
 
 
 interface TodoFormContainerProps {
@@ -16,15 +18,9 @@ const TodoFormContainer: React.FC<TodoFormContainerProps> = ({ onFormSubmit }) =
 
     const handleCreateTodoTask = async (todo: Todo) => {
 
-        try {
-            await execute(todo);
-            onFormSubmit();
-            setErrorMessage(null);
-
-        }catch(error){
-            setErrorMessage(error.message);
-        }
-           
+        const response = await execute(todo) as ServiceResponse<Todo>;
+        setErrorMessage(response.error?.message);
+        onFormSubmit();
    
     };
 

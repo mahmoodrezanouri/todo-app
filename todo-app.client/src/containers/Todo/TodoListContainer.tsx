@@ -3,6 +3,7 @@ import TodoGrid from '../../components/Todo/TodoGrid';
 import TodoTaskService from '../../services/TodoTaskService';
 import useAsync from '../../hooks/useAsync';
 import Todo from '../../models/Todo';
+import ServiceResponse from '../../models/ServiceResponse';
 
 
 interface TodoListContainerProps {
@@ -29,9 +30,9 @@ const TodoListContainer: React.FC<TodoListContainerProps> = ({ refreshTodos, set
 
     const getTodos = async () => {
 
-        const result = await execute(currentPage, pageSize);
+        const response = await execute(currentPage, pageSize) as ServiceResponse<Todo[]>;
 
-        setTodos(result);
+        setTodos(response.data);
         setTotalPages(0);
 
     };

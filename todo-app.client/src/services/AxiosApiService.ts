@@ -37,11 +37,11 @@ const parseErrorMessage = (responseData: any): string => {
 
         for (const prop in responseData) {
             if (Array.isArray(responseData[prop])) {
-                errorMessages.push(responseData[prop].join(' '));
+                errorMessages.push(responseData[prop].join('<br />'));
             }
         }
 
-        return errorMessages.join(' ');
+        return errorMessages.join('<br />');
     }
     return '';
 };

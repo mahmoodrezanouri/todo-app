@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Todo from '../../models/Todo';
@@ -14,23 +14,23 @@ const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, error }) => {
 
     const [description, setDescription] = useState<string>('');
     const [dueDate, setDueDate] = useState<Date | null>(null);
-    //const [errort, setError] = useState<string | null>(error);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (description.trim() && dueDate) {
-            onSubmit({ description, dueDate }); 
-            setDescription('');
-            setDueDate(null);
-            //setError(null);
+
+            onSubmit({ description, dueDate });
+            if (error != null) {
+           
+                setDescription('');
+                setDueDate(null);
+            }
+
         } else {
             alert('Please enter a description and select a due date.');
         }
     };
-    //useEffect(() => {
-    //    setError(error);
 
-    //}, [error]);
 
     return (
         <div>

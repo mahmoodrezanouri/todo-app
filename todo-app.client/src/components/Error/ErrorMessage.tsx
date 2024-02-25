@@ -13,7 +13,7 @@ const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
 
     return (
         <div className="error-message">
-            <p>{message}</p>
+            <p dangerouslySetInnerHTML={{ __html: message }} />
         </div>
     );
 };
