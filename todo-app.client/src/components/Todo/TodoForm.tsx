@@ -1,28 +1,36 @@
-// TodoForm.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import Todo from '../../models/Todo';
+import ErrorMessage from "../../components/Error/ErrorMessage";
 
-interface Todo {
-    id: number;
-    description: string;
-    // Add other properties as needed
-}
 
 interface TodoFormProps {
     onSubmit: (todo: Todo) => void;
+    error: string | null;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({ onSubmit }) => {
-    const [todo, setTodo] = useState<Todo>({ id: 0, description: '' });
+const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, error }) => {
+
+    const [description, setDescription] = useState<string>('');
+    const [dueDate, setDueDate] = useState<Date | null>(null);
+    //const [errort, setError] = useState<string | null>(error);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (todo.description.trim()) {
-            onSubmit(todo);
-            setTodo({ id: 0, description: '' }); // Reset the form
+        if (description.trim() && dueDate) {
+            onSubmit({ description, dueDate }); 
+            setDescription('');
+            setDueDate(null);
+            //setError(null);
         } else {
-            alert('Please enter a description.');
+            alert('Please enter a description and select a due date.');
         }
     };
+    //useEffect(() => {
+    //    setError(error);
+
+    //}, [error]);
 
     return (
         <div>
@@ -32,11 +40,17 @@ const TodoForm: React.FC<TodoFormProps> = ({ onSubmit }) => {
                     Description:
                     <input
                         type="text"
-                        value={todo.description}
-                        onChange={(e) => setTodo({ ...todo, description: e.target.value })}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                     />
                 </label>
-                {/* Add input fields for other properties if needed */}
+                <label>
+                    Due Date:
+                    <DatePicker selected={dueDate} onChange={(date) => setDueDate(date)} />
+                </label>
+
+                <ErrorMessage message={error} />
+
                 <button type="submit">Create TodoTask</button>
             </form>
         </div>
@@ -44,3 +58,4 @@ const TodoForm: React.FC<TodoFormProps> = ({ onSubmit }) => {
 };
 
 export default TodoForm;
+

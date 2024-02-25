@@ -14,12 +14,14 @@ const useAsync = <T,>(asyncFn: (...args: any[]) => Promise<T>): UseAsyncReturnTy
 
     const execute = async (...args: any[]): Promise<T | void> => {
         try {
+
             setLoading(true);
             const result = await asyncFn(...args);
             setData(result);
-            return result;
+            return result;  
         } catch (error) {
             setError(error as Error);
+            throw (error as Error);
         } finally {
             setLoading(false);
         }

@@ -2,6 +2,7 @@ import { FC } from 'react';
 import DataGrid from 'react-data-table-component';
 import LoadingSpinner from "../../components/Loading/LoadingSpinner";
 import ErrorMessage from "../../components/Error/ErrorMessage";
+import Todo from '../../models/Todo';
 
 interface TodoGridProps {
     todos: Todo[];
@@ -13,10 +14,6 @@ interface TodoGridProps {
     currentPage: number;
 }
 
-interface Todo {
-    id: number;
-    description: string;
-}
 
 const TodoGrid: FC<TodoGridProps> = ({ todos , totalPages, onPageChange, onPerRowsChange, loading, error }) => {
 
@@ -32,7 +29,20 @@ const TodoGrid: FC<TodoGridProps> = ({ todos , totalPages, onPageChange, onPerRo
         {
             name: 'description',
             selector: (row: Todo) => row.description,
-        }
+        },
+        {
+            name: 'dueDate',
+            selector: (row: Todo) => row.dueDate,
+        },
+        {
+            name: 'deadline',
+            selector: (row: Todo) => row.deadline
+        },
+        {
+            name: 'done',
+            selector: (row: Todo) => row.done,
+        },
+
     ];
 
     const handlePageChange = (page: number) => {

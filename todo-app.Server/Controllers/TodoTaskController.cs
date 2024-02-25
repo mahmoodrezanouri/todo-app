@@ -37,6 +37,11 @@ public class TodoTaskController : ControllerBase
     [HttpPost]
     public ActionResult<TodoTask> AddTask([FromBody] TodoTask task)
     {
+        if (!ModelState.IsValid)
+        {
+            // If model validation fails, return a 400 Bad Request with validation errors.
+            return BadRequest(ModelState);
+        }
         if (task == null)
         {
             return BadRequest("Invalid task data.");
