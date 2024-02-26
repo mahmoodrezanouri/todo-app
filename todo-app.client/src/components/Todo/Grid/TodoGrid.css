@@ -1,0 +1,13 @@
+.sc-jsEeTM.kUMlDB.rdt_TableRow.overdue-row {
+    background-color: #ff000014;
+}
+.sc-jsEeTM.kUMlDB.rdt_TableRow.done-row {
+    background-color: #a8ec67;
+}
+.delete-icon {
+    cursor: pointer;
+}
+
+    .delete-icon:hover {
+        color: red; 
+    }

@@ -52,4 +52,14 @@ public class TodoTaskService : ITodoTaskService
         return _taskRepository.GetAll()
             .Where(task => task.Deadline.HasValue && task.Deadline.Value < currentDate && !task.Done);
     }
+
+    public void MarkTaskAsUnDone(int taskId)
+    {
+        var task = _taskRepository.GetById(taskId);
+        if (task != null)
+        {
+            task.Done = false;
+            _taskRepository.Update(task);
+        }
+    }
 }

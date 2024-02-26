@@ -20,6 +20,22 @@ const AxiosApiService: IApiService = {
             throwErrorMessage(error, 'Failed to add task');
         }
     },
+    delete: async <T>(url: string, data?: object): Promise<T> => {
+        try {
+            const response = await axios.delete<T>(url, data);
+            return response.data;
+        } catch (error) {
+            throwErrorMessage(error, 'Failed to delete task');
+        }
+    },
+    put: async <T>(url: string, data?: object): Promise<T> => {
+        try {
+            const response = await axios.put<T>(url, data);
+            return response.data;
+        } catch (error) {
+            throwErrorMessage(error, 'Failed to update task');
+        }
+    }
 
 };
 const throwErrorMessage = (error: any, defualtMessage: string): string => {

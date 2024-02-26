@@ -64,6 +64,18 @@ public class TodoTaskController : ControllerBase
         _todoTaskService.MarkTaskAsDone(id);
         return NoContent();
     }
+    [HttpPut("{id}/undone")]
+    public  IActionResult MarkTaskAsUndone(int id)
+    {
+        var existingTask = _todoTaskService.GetTaskById(id);
+        if (existingTask == null)
+        {
+            return NotFound();
+        }
+
+        _todoTaskService.MarkTaskAsUnDone(id);
+        return NoContent();
+    }
 
     [HttpDelete("{id}")]
     public IActionResult DeleteTask(int id)

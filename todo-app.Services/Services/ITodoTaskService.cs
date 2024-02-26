@@ -9,6 +9,7 @@ namespace todo_app.Services
         TodoTask GetTaskById(int taskId);
         void AddTask(TodoTask task);
         void MarkTaskAsDone(int taskId);
+        void MarkTaskAsUnDone(int taskId);
         void DeleteTask(int taskId);
         IEnumerable<TodoTask> GetOverdueTasks();
     }
