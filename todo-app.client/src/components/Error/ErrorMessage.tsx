@@ -10,12 +10,18 @@ const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
     if (message == null) {
         return '';
     }
+    const errorLines = message.split('<br />');
 
     return (
         <div className="error-message">
-            <p dangerouslySetInnerHTML={{ __html: message }} />
+        <ul >
+            {errorLines.map((line, index) => (
+                <li key={index}>{line}</li>
+            ))}
+            </ul>
         </div>
     );
+  
 };
 
 export default ErrorMessage;

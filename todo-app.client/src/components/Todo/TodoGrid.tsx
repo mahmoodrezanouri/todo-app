@@ -3,6 +3,7 @@ import DataGrid from 'react-data-table-component';
 import LoadingSpinner from "../../components/Loading/LoadingSpinner";
 import ErrorMessage from "../../components/Error/ErrorMessage";
 import Todo from '../../models/Todo';
+import './TodoGrid.css';
 
 interface TodoGridProps {
     todos: Todo[];
@@ -27,19 +28,19 @@ const TodoGrid: FC<TodoGridProps> = ({ todos , totalPages, onPageChange, onPerRo
             selector: (row: Todo) => row.id,
         },
         {
-            name: 'description',
+            name: 'Description',
             selector: (row: Todo) => row.description,
         },
         {
-            name: 'dueDate',
+            name: 'Due Date',
             selector: (row: Todo) => row.dueDate,
         },
         {
-            name: 'deadline',
+            name: 'Deadline',
             selector: (row: Todo) => row.deadline
         },
         {
-            name: 'done',
+            name: 'Done',
             selector: (row: Todo) => row.done,
         },
 
@@ -64,7 +65,16 @@ const TodoGrid: FC<TodoGridProps> = ({ todos , totalPages, onPageChange, onPerRo
                 onChangePage={handlePageChange}
                 onChangeRowsPerPage={handlePerRowsChange}
                 progressComponent={<LoadingSpinner />}
-                progressPending={loading} />
+                progressPending={loading}
+         
+                conditionalRowStyles={[
+                    {
+                        when: (row: Todo) => row.overDue,
+                        classNames : ['overdue-row']
+                    }
+                ]}
+            
+            />
         </div>
     );
 }

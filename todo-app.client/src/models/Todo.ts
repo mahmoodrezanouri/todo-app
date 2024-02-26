@@ -4,6 +4,7 @@ interface Todo {
     dueDate?: Date | null;
     done: boolean; 
     deadline?: Date | null;
+    overDue: boolean;
 }
 
 export default Todo;

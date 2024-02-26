@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TodoListContainer from './containers/Todo/TodoListContainer';
 import TodoFormContainer from './containers/Todo/TodoFormContainer';
+import './App.css'
 
 function App() {
     const [refreshTodos, setRefreshTodos] = useState<boolean>(true);
