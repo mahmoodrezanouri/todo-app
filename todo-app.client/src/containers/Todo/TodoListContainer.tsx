@@ -52,8 +52,13 @@ const TodoListContainer: React.FC<TodoListContainerProps> = ({ refreshTodos, set
 
         const response = await execute(currentPage, pageSize) as ServiceResponse<Todo[]>;
 
-        setTodos(response.data);
-        setTotalPages(0);
+        if (response.error === null) {
+
+            const data = response.data as Todo[];
+            setTodos(data);
+            setTotalPages(0);
+        }
+   
     };
 
     useEffect(() => {

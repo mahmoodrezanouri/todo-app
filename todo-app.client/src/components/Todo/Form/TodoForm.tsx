@@ -24,7 +24,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, error }) => {
   
         if (Object.keys(errors).length === 0) {
    
-            onSubmit({ description, deadline });
+            onSubmit({ id: 0, createDate: new Date(), done: false, overDue: false, description, deadline });
 
             setDescription('');
             setDeadline(null);

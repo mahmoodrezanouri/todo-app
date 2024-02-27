@@ -19,10 +19,10 @@ const useAsync = <T,>(asyncFn: (...args: any[]) => Promise<T>): UseAsyncReturnTy
             setLoading(true);
             const result = await asyncFn(...args);
             setData(result);
-            return { data: result, error: null };
+            return { data: result };
         } catch (error) {
             setError(error as Error);
-            return { data: null, error: error as Error };
+            return { error: error as Error };
         } finally {
             setLoading(false);
         }
