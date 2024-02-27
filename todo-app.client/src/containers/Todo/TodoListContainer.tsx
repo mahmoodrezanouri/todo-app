@@ -52,7 +52,7 @@ const TodoListContainer: React.FC<TodoListContainerProps> = ({ refreshTodos, set
 
         const response = await execute(currentPage, pageSize) as ServiceResponse<Todo[]>;
 
-        if (response.error === null) {
+        if (response.error == null) {
 
             const data = response.data as Todo[];
             setTodos(data);

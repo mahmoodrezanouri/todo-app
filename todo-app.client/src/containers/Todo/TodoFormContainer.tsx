@@ -19,7 +19,14 @@ const TodoFormContainer: React.FC<TodoFormContainerProps> = ({ onFormSubmit }) =
     const handleCreateTodoTask = async (todo: Todo) => {
 
         const response = await execute(todo) as ServiceResponse<Todo>;
-        setErrorMessage(response.error?.message);
+
+        const error = response.error as Error;
+
+        if (error) {
+            setErrorMessage(error.message);
+        }
+ 
+
         onFormSubmit();
    
     };

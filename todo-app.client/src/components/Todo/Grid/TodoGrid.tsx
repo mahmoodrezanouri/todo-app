@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import DataGrid from 'react-data-table-component';
+import DataGrid, { TableColumn } from 'react-data-table-component';
 import LoadingSpinner from "../../../components/Loading/LoadingSpinner";
 import ErrorMessage from "../../../components/Error/ErrorMessage";
 import Todo from '../../../models/Todo';
@@ -27,7 +27,7 @@ const TodoGrid: FC<TodoGridProps> = ({ todos, totalPages, onPageChange, onPerRow
         return <ErrorMessage message={error.message} />;
     }
 
-    const columns = [
+    const columns: TableColumn<Todo>[] = [
         {
             name: 'Id',
             selector: (row: Todo) => row.id,
@@ -38,11 +38,11 @@ const TodoGrid: FC<TodoGridProps> = ({ todos, totalPages, onPageChange, onPerRow
         },
         {
             name: 'Create Date',
-            selector: (row: Todo) => row.createDate,
+            selector: (row: Todo) => row.createDate ? row.createDate.toString() : '',
         },
         {
             name: 'Deadline',
-            selector: (row: Todo) => row.deadline
+            selector: (row: Todo) => row.deadline ? row.deadline.toString() : '',
         },
         {
             name: 'Done',
@@ -117,7 +117,7 @@ const TodoGrid: FC<TodoGridProps> = ({ todos, totalPages, onPageChange, onPerRow
                         classNames: ['done-row']
                     }
                 ]}
-             
+
             />
         </div>
     );
