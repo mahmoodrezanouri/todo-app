@@ -37,8 +37,8 @@ const TodoGrid: FC<TodoGridProps> = ({ todos, totalPages, onPageChange, onPerRow
             selector: (row: Todo) => row.description,
         },
         {
-            name: 'Due Date',
-            selector: (row: Todo) => row.dueDate,
+            name: 'Create Date',
+            selector: (row: Todo) => row.createDate,
         },
         {
             name: 'Deadline',

@@ -37,7 +37,7 @@ public class TodoTaskController : ControllerBase
     [HttpPost]
     public ActionResult<TodoTask> AddTask([FromBody] TodoTask task)
     {
-        task.Deadline = DateTime.UtcNow.AddDays(1);
+
         if (!ModelState.IsValid)
         {
             // If model validation fails, return a 400 Bad Request with validation errors.

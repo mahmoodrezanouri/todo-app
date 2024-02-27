@@ -36,7 +36,7 @@ public class TodoTaskService : ITodoTaskService
         var task = _taskRepository.GetById(taskId);
         if (task != null)
         {
-            task.Done = true;
+            task.SetDone(true);
             _taskRepository.Update(task);
         }
     }
@@ -58,7 +58,7 @@ public class TodoTaskService : ITodoTaskService
         var task = _taskRepository.GetById(taskId);
         if (task != null)
         {
-            task.Done = false;
+            task.SetDone(false);
             _taskRepository.Update(task);
         }
     }

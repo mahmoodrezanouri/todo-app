@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Todo from '../../../models/Todo';
 import ErrorMessage from '../../../components/Error/ErrorMessage';
 import './TodoForm.css';
+import validationService from '../../../services/ValidationService';
+import { parseErrorMessage } from '../../../utils/utility';
 
 interface TodoFormProps {
     onSubmit: (todo: Todo) => void;
@@ -12,20 +14,33 @@ interface TodoFormProps {
 
 const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, error }) => {
     const [description, setDescription] = useState<string>('');
-    const [dueDate, setDueDate] = useState<Date | null>(null);
+    const [deadline, setDeadline] = useState<Date | null>(null);
+    const [formErrors, setFormErrors] = useState<string | null>(error);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (description.trim() && dueDate) {
-            onSubmit({ description, dueDate });
-            if (error !== null) {
-                setDescription('');
-                setDueDate(null);
-            }
+
+        const errors = validationService.validateTodoForm(description, deadline);
+  
+        if (Object.keys(errors).length === 0) {
+   
+            onSubmit({ description, deadline });
+
+            setDescription('');
+            setDeadline(null);
+          
         } else {
-            alert('Please enter a description and select a due date.');
+            const parsedErrors = parseErrorMessage(errors)
+            setFormErrors(parsedErrors);
         }
     };
+    useEffect(() => {
+     
+        if (error !== null) {
+            setFormErrors(error);
+        }
+    }, [error, formErrors]);
+
 
     return (
         <div className="todo-form-container">
@@ -41,14 +56,14 @@ const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, error }) => {
                 </div>
 
                 <div className="field">
-                    <label>Due Date: </label>
-                    <DatePicker selected={dueDate} onChange={(date) => setDueDate(date)} />
+                    <label>Deadline: </label>
+                    <DatePicker selected={deadline} onChange={(date) => setDeadline(date)} />
                 </div>
 
                 <div className="field">
                     <button type="submit">Create</button>
                 </div>
-                <ErrorMessage message={error} />
+                <ErrorMessage message={formErrors} />
             </form>
         </div>
     );

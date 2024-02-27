@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { IApiService } from '../interfaces/IApiService';
+import { parseErrorMessage } from '../utils/utility';
 
 const AxiosApiService: IApiService = {
 
@@ -47,18 +48,5 @@ const throwErrorMessage = (error: any, defualtMessage: string): string => {
 
 };
 
-const parseErrorMessage = (responseData: any): string => {
-    if (responseData && typeof responseData === 'object') {
-        const errorMessages: string[] = [];
 
-        for (const prop in responseData) {
-            if (Array.isArray(responseData[prop])) {
-                errorMessages.push(responseData[prop].join('<br />'));
-            }
-        }
-
-        return errorMessages.join('<br />');
-    }
-    return '';
-};
 export default AxiosApiService;

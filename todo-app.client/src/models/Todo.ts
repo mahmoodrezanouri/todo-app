@@ -1,7 +1,7 @@
 interface Todo {
     id: number;
     description: string;
-    dueDate?: Date | null;
+    createDate: Date | null;
     done: boolean; 
     deadline?: Date | null;
     overDue: boolean;
